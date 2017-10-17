@@ -1,0 +1,1 @@
+Small service that stores one time accessible data. 
