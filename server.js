@@ -9,19 +9,21 @@ app.use(bodyParser.json());
 
 app.post('/:id', function (req, res) {
   if (req.body.data) {
+    console.log(`[SET][${req.ip}]: ${req.body.data} => ${req.params.id}`);
     data[req.params.id] = req.body.data;
     res.end('Success\n');
   } else {
-    res.end('Fail\n');
+    res.status(400).end();
   }
 });
 
 app.get('/:id', function(req, res) {
   if (data[req.params.id]) {
+    console.log(`[GET][${req.ip}]: ${data[req.params.id]} => ${req.params.id}`);
     res.end(JSON.stringify(data[req.params.id]));
     delete data[req.params.id];
   } else {
-    res.end('No Data\n');
+    res.status(400).end();
   }
 });
 
